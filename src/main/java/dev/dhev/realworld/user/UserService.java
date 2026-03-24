@@ -5,6 +5,7 @@ import dev.dhev.realworld.shared.exception.EmailAlreadyTakenException;
 import dev.dhev.realworld.shared.exception.InvalidCredentialsException;
 import dev.dhev.realworld.shared.exception.ResourceNotFoundException;
 import dev.dhev.realworld.shared.exception.UsernameAlreadyTakenException;
+import dev.dhev.realworld.shared.exception.ValidationException;
 import dev.dhev.realworld.user.dto.LoginUserRequest;
 import dev.dhev.realworld.user.dto.NewUserRequest;
 import dev.dhev.realworld.user.dto.UpdateUserRequest;
@@ -23,6 +24,9 @@ public class UserService {
 
     public UserResponse register(NewUserRequest request) {
         var dto = request.user();
+        if (isBlank(dto.username())) throw new ValidationException("username", "can't be blank");
+        if (isBlank(dto.email())) throw new ValidationException("email", "can't be blank");
+        if (isBlank(dto.password())) throw new ValidationException("password", "can't be blank");
         if (userRepository.existsByEmail(dto.email())) throw new EmailAlreadyTakenException();
         if (userRepository.existsByUsername(dto.username())) throw new UsernameAlreadyTakenException();
 
@@ -37,6 +41,9 @@ public class UserService {
 
     public UserResponse login(LoginUserRequest request) {
         var dto = request.user();
+        if (isBlank(dto.email())) throw new ValidationException("email", "can't be blank");
+        if (isBlank(dto.password())) throw new ValidationException("password", "can't be blank");
+
         var user = userRepository.findByEmail(dto.email())
                 .orElseThrow(InvalidCredentialsException::new);
 
@@ -58,13 +65,25 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("user"));
         var dto = request.user();
 
-        if (dto.email() != null) user.setEmail(dto.email());
-        if (dto.username() != null) user.setUsername(dto.username());
+        if (dto.email() != null) {
+            String email2 = dto.email().orElse(null);
+            if (isBlank(email2)) throw new ValidationException("email", "can't be blank");
+            user.setEmail(email2);
+        }
+        if (dto.username() != null) {
+            String username = dto.username().orElse(null);
+            if (isBlank(username)) throw new ValidationException("username", "can't be blank");
+            user.setUsername(username);
+        }
         if (dto.password() != null) user.setPassword(passwordEncoder.encode(dto.password()));
-        if (dto.bio() != null) user.setBio(dto.bio());
-        if (dto.image() != null) user.setImage(dto.image());
+        if (dto.bio() != null) user.setBio(dto.bio().filter(s -> !s.isEmpty()).orElse(null));
+        if (dto.image() != null) user.setImage(dto.image().filter(s -> !s.isEmpty()).orElse(null));
         userRepository.save(user);
 
         return UserResponse.from(user, jwtService.generateToken(user.getEmail()));
+    }
+
+    private boolean isBlank(String value) {
+        return value == null || value.isBlank();
     }
 }

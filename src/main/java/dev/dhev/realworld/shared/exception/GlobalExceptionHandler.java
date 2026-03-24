@@ -35,6 +35,12 @@ public class GlobalExceptionHandler {
         return error(ex);
     }
 
+    @ExceptionHandler(ValidationException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public Map<String, Map<String, List<String>>> handleValidation(ValidationException ex) {
+        return error(ex);
+    }
+
     private Map<String, Map<String, List<String>>> error(AppException ex) {
         return Map.of("errors", Map.of(ex.getField(), List.of(ex.getMessage())));
     }
