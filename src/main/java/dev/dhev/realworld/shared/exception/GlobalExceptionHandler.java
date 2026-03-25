@@ -1,5 +1,7 @@
 package dev.dhev.realworld.shared.exception;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -10,6 +12,8 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(EmailAlreadyTakenException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
@@ -39,6 +43,13 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public Map<String, Map<String, List<String>>> handleValidation(ValidationException ex) {
         return error(ex);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Map<String, Map<String, List<String>>> handleUnexpected(Exception ex) {
+        log.error("Unexpected error", ex);
+        return Map.of("errors", Map.of("server", List.of("an unexpected error occurred")));
     }
 
     private Map<String, Map<String, List<String>>> error(AppException ex) {
