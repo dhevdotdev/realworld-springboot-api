@@ -1,0 +1,890 @@
+{
+  "yaakVersion": "2026.3.1",
+  "yaakSchema": 4,
+  "timestamp": "2026-04-05T10:32:06.094137",
+  "resources": {
+    "workspaces": [
+      {
+        "model": "workspace",
+        "id": "wk_BC5pTHGFBw",
+        "createdAt": "2026-04-05T10:19:53.919360",
+        "updatedAt": "2026-04-05T10:19:53.919360",
+        "authentication": {},
+        "authenticationType": null,
+        "description": "Conduit API documentation\n\nContact Support:\n Name: RealWorld",
+        "headers": [],
+        "name": "RealWorld Conduit API",
+        "encryptionKeyChallenge": null,
+        "settingValidateCertificates": true,
+        "settingFollowRedirects": true,
+        "settingRequestTimeout": 0,
+        "settingDnsOverrides": []
+      }
+    ],
+    "environments": [
+      {
+        "model": "environment",
+        "id": "ev_WqsN6BcFHx",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "createdAt": "2026-04-05T10:19:53.924492",
+        "updatedAt": "2026-04-05T10:19:53.924492",
+        "name": "Global Variables",
+        "public": false,
+        "base": true,
+        "parentModel": "workspace",
+        "parentId": null,
+        "variables": [
+          {
+            "enabled": true,
+            "name": "baseUrl",
+            "value": "http://localhost:8080/api",
+            "id": "yBZIFMwNFd"
+          },
+          {
+            "enabled": true,
+            "name": "apiKey",
+            "value": "",
+            "id": "hf9BDZx3kJ"
+          }
+        ],
+        "color": null,
+        "sortPriority": 0.0
+      }
+    ],
+    "folders": [
+      {
+        "model": "folder",
+        "id": "fl_juwfgASRWE",
+        "createdAt": "2026-04-05T10:19:53.924406",
+        "updatedAt": "2026-04-05T10:19:53.924406",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_fvQsrvhGXN",
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "favorite",
+        "sortPriority": 23.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_jpja5fsaRQ",
+        "createdAt": "2026-04-05T10:19:53.924372",
+        "updatedAt": "2026-04-05T10:19:53.924372",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_fvQsrvhGXN",
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "comments",
+        "sortPriority": 19.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_fvQsrvhGXN",
+        "createdAt": "2026-04-05T10:19:53.924338",
+        "updatedAt": "2026-04-05T10:19:53.924338",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_SFLpmwhvRu",
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "{slug}",
+        "sortPriority": 15.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_SFLpmwhvRu",
+        "createdAt": "2026-04-05T10:19:53.924304",
+        "updatedAt": "2026-04-05T10:19:53.924304",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "articles",
+        "sortPriority": 11.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_ou6gvCU75B",
+        "createdAt": "2026-04-05T10:19:53.924269",
+        "updatedAt": "2026-04-05T10:19:53.924269",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_7YQRWYFwMg",
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "follow",
+        "sortPriority": 8.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_7YQRWYFwMg",
+        "createdAt": "2026-04-05T10:19:53.924233",
+        "updatedAt": "2026-04-05T10:19:53.924233",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "profiles/{username}",
+        "sortPriority": 6.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_cQJjEQsWXN",
+        "createdAt": "2026-04-05T10:19:53.924192",
+        "updatedAt": "2026-04-05T10:19:53.924192",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "user",
+        "sortPriority": 3.0
+      },
+      {
+        "model": "folder",
+        "id": "fl_8qGCDRmj8u",
+        "createdAt": "2026-04-05T10:19:53.923992",
+        "updatedAt": "2026-04-05T10:19:53.923992",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "description": "",
+        "headers": [],
+        "name": "users",
+        "sortPriority": 0.0
+      }
+    ],
+    "httpRequests": [
+      {
+        "model": "http_request",
+        "id": "rq_M4Lw8vojpL",
+        "createdAt": "2026-04-05T10:19:53.923665",
+        "updatedAt": "2026-04-05T10:19:53.923665",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": null,
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "Get tags. Auth not required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get tags",
+        "sortPriority": 26.0,
+        "url": "${[baseUrl]}/tags",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_SPRBA6BCy9",
+        "createdAt": "2026-04-05T10:19:53.923612",
+        "updatedAt": "2026-04-05T10:19:53.923612",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_juwfgASRWE",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {},
+        "bodyType": null,
+        "description": "Unfavorite an article. Auth is required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "DELETE",
+        "name": "Unfavorite an article",
+        "sortPriority": 25.0,
+        "url": "${[baseUrl]}/articles/:slug/favorite",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":slug",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_sUnbygwyo4",
+        "createdAt": "2026-04-05T10:19:53.923557",
+        "updatedAt": "2026-04-05T10:19:53.923557",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_juwfgASRWE",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {},
+        "bodyType": null,
+        "description": "Favorite an article. Auth is required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Favorite an article",
+        "sortPriority": 24.0,
+        "url": "${[baseUrl]}/articles/:slug/favorite",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":slug",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_P47qFcPFyB",
+        "createdAt": "2026-04-05T10:19:53.923500",
+        "updatedAt": "2026-04-05T10:19:53.923500",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_jpja5fsaRQ",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {},
+        "bodyType": null,
+        "description": "Delete a comment for an article. Auth is required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "DELETE",
+        "name": "Delete a comment for an article",
+        "sortPriority": 22.0,
+        "url": "${[baseUrl]}/articles/:slug/comments/:id",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":slug",
+            "value": "<string>",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": ":id",
+            "value": "<integer>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_FnMHiafaXS",
+        "createdAt": "2026-04-05T10:19:53.923440",
+        "updatedAt": "2026-04-05T10:19:53.923440",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_jpja5fsaRQ",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {
+          "text": "{\n  \"comment\": {\n    \"body\": \"<string>\"\n  }\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Create a comment for an article. Auth is required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Create a comment for an article",
+        "sortPriority": 21.0,
+        "url": "${[baseUrl]}/articles/:slug/comments",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":slug",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_gCWZWoVwQn",
+        "createdAt": "2026-04-05T10:19:53.923381",
+        "updatedAt": "2026-04-05T10:19:53.923381",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_jpja5fsaRQ",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "Get the comments for an article. Auth is optional",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get comments for an article",
+        "sortPriority": 20.0,
+        "url": "${[baseUrl]}/articles/:slug/comments",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":slug",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_frywW3zHGq",
+        "createdAt": "2026-04-05T10:19:53.923299",
+        "updatedAt": "2026-04-05T10:19:53.923299",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_fvQsrvhGXN",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {},
+        "bodyType": null,
+        "description": "Delete an article. Auth is required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "DELETE",
+        "name": "Delete an article",
+        "sortPriority": 18.0,
+        "url": "${[baseUrl]}/articles/:slug",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":slug",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_JueBMLSVya",
+        "createdAt": "2026-04-05T10:19:53.923227",
+        "updatedAt": "2026-04-05T10:19:53.923227",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_fvQsrvhGXN",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {
+          "text": "{\n  \"article\": {\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"body\": \"<string>\"\n  }\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Update an article. Auth is required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "PUT",
+        "name": "Update an article",
+        "sortPriority": 17.0,
+        "url": "${[baseUrl]}/articles/:slug",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":slug",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_WzeLYV8jwF",
+        "createdAt": "2026-04-05T10:19:53.923168",
+        "updatedAt": "2026-04-05T10:19:53.923168",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_fvQsrvhGXN",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "Get an article. Auth not required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get an article",
+        "sortPriority": 16.0,
+        "url": "${[baseUrl]}/articles/:slug",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":slug",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_U9xxYFZkap",
+        "createdAt": "2026-04-05T10:19:53.923103",
+        "updatedAt": "2026-04-05T10:19:53.923103",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_SFLpmwhvRu",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {},
+        "bodyType": null,
+        "description": "Get most recent articles from users you follow. Use query parameters to limit. Auth is required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get recent articles from users you follow",
+        "sortPriority": 14.0,
+        "url": "${[baseUrl]}/articles/feed",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "offset",
+            "value": "<integer>",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "limit",
+            "value": "20",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_UzKHLEbb59",
+        "createdAt": "2026-04-05T10:19:53.923034",
+        "updatedAt": "2026-04-05T10:19:53.923035",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_SFLpmwhvRu",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {
+          "text": "{\n  \"article\": {\n    \"body\": \"<string>\",\n    \"description\": \"<string>\",\n    \"title\": \"<string>\",\n    \"tagList\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Create an article. Auth is required",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Create an article",
+        "sortPriority": 13.0,
+        "url": "${[baseUrl]}/articles",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_dr6Rk69tez",
+        "createdAt": "2026-04-05T10:19:53.922970",
+        "updatedAt": "2026-04-05T10:19:53.922970",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_SFLpmwhvRu",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "Get most recent articles globally. Use query parameters to filter results. Auth is optional",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get recent articles globally",
+        "sortPriority": 12.0,
+        "url": "${[baseUrl]}/articles",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": "tag",
+            "value": "<string>",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "author",
+            "value": "<string>",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "favorited",
+            "value": "<string>",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "offset",
+            "value": "<integer>",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "limit",
+            "value": "20",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_UsXqwM7J8g",
+        "createdAt": "2026-04-05T10:19:53.922905",
+        "updatedAt": "2026-04-05T10:19:53.922905",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_ou6gvCU75B",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {},
+        "bodyType": null,
+        "description": "Unfollow a user by username",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "DELETE",
+        "name": "Unfollow a user",
+        "sortPriority": 10.0,
+        "url": "${[baseUrl]}/profiles/:username/follow",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":username",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_hGT5Ti58Eu",
+        "createdAt": "2026-04-05T10:19:53.922833",
+        "updatedAt": "2026-04-05T10:19:53.922834",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_ou6gvCU75B",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {},
+        "bodyType": null,
+        "description": "Follow a user by username",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Follow a user",
+        "sortPriority": 9.0,
+        "url": "${[baseUrl]}/profiles/:username/follow",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":username",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_9aNcXYLL5F",
+        "createdAt": "2026-04-05T10:19:53.922734",
+        "updatedAt": "2026-04-05T10:19:53.922734",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_7YQRWYFwMg",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {},
+        "bodyType": null,
+        "description": "Get a profile of a user of the system. Auth is optional",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get a profile",
+        "sortPriority": 7.0,
+        "url": "${[baseUrl]}/profiles/:username",
+        "urlParameters": [
+          {
+            "enabled": true,
+            "name": ":username",
+            "value": "<string>",
+            "id": null
+          }
+        ]
+      },
+      {
+        "model": "http_request",
+        "id": "rq_r2WPhHyZp9",
+        "createdAt": "2026-04-05T10:19:53.922370",
+        "updatedAt": "2026-04-05T10:19:53.922370",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_cQJjEQsWXN",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {
+          "text": "{\n  \"user\": {\n    \"email\": \"<string>\",\n    \"password\": \"<string>\",\n    \"username\": \"<string>\",\n    \"bio\": \"<string>\",\n    \"image\": \"<string>\"\n  }\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Updated user information for current user",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "PUT",
+        "name": "Update current user",
+        "sortPriority": 5.0,
+        "url": "${[baseUrl]}/user",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_UQEx2jzqWF",
+        "createdAt": "2026-04-05T10:19:53.922310",
+        "updatedAt": "2026-04-05T10:19:53.922310",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_cQJjEQsWXN",
+        "authentication": {
+          "key": "Authorization",
+          "location": "header",
+          "value": "Token ${[apiKey]}"
+        },
+        "authenticationType": "apikey",
+        "body": {},
+        "bodyType": null,
+        "description": "Gets the currently logged-in user",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "GET",
+        "name": "Get current user",
+        "sortPriority": 4.0,
+        "url": "${[baseUrl]}/user",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_VGCacZnNoZ",
+        "createdAt": "2026-04-05T10:19:53.922243",
+        "updatedAt": "2026-04-05T10:19:53.922243",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_8qGCDRmj8u",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"user\": {\n    \"email\": \"<string>\",\n    \"password\": \"<password>\"\n  }\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Login for existing user",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Existing user login",
+        "sortPriority": 2.0,
+        "url": "${[baseUrl]}/users/login",
+        "urlParameters": []
+      },
+      {
+        "model": "http_request",
+        "id": "rq_7MusceHFxw",
+        "createdAt": "2026-04-05T10:19:53.922028",
+        "updatedAt": "2026-04-05T10:19:53.922028",
+        "workspaceId": "wk_BC5pTHGFBw",
+        "folderId": "fl_8qGCDRmj8u",
+        "authentication": {},
+        "authenticationType": null,
+        "body": {
+          "text": "{\n  \"user\": {\n    \"email\": \"<email>\",\n    \"password\": \"<password>\",\n    \"username\": \"<username>\"\n  }\n}"
+        },
+        "bodyType": "application/json",
+        "description": "Register a new user",
+        "headers": [
+          {
+            "enabled": true,
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": null
+          },
+          {
+            "enabled": true,
+            "name": "Accept",
+            "value": "application/json",
+            "id": null
+          }
+        ],
+        "method": "POST",
+        "name": "Create User",
+        "sortPriority": 1.0,
+        "url": "${[baseUrl]}/users",
+        "urlParameters": []
+      }
+    ],
+    "grpcRequests": [],
+    "websocketRequests": []
+  }
+}
