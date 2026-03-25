@@ -67,6 +67,7 @@ public class UserService {
         return UserResponse.from(user, jwtService.generateToken(user.getEmail()));
     }
 
+    @SuppressWarnings("OptionalAssignedToNull") // null = field absent (see OptionalStringDeserializer)
     public UserResponse updateUser(String email, UpdateUserRequest request) {
         var user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new ResourceNotFoundException("user"));

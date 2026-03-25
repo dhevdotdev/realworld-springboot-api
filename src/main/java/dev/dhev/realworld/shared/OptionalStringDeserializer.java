@@ -24,7 +24,8 @@ public class OptionalStringDeserializer extends StdDeserializer<Optional<String>
     }
 
     @Override
+    @SuppressWarnings("OptionalAssignedToNull")
     public Optional<String> getAbsentValue(DeserializationContext ctxt) {
-        return null;
+        return null; // null signals "field was absent" — distinct from Optional.empty() which means "explicitly null"
     }
 }
