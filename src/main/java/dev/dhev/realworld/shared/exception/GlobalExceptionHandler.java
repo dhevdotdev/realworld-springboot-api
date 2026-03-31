@@ -45,6 +45,12 @@ public class GlobalExceptionHandler {
         return error(ex);
     }
 
+    @ExceptionHandler(ForbiddenException.class)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    public Map<String, Map<String, List<String>>> handleForbidden(ForbiddenException ex) {
+        return error(ex);
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Map<String, Map<String, List<String>>> handleUnexpected(Exception ex) {

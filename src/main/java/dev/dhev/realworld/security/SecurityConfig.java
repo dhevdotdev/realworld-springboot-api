@@ -38,6 +38,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/users", "/api/users/login").permitAll()
                 .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/profiles/**").permitAll()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/articles/feed").authenticated()
+                .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/articles/**", "/api/tags").permitAll()
                 .anyRequest().authenticated()
             )
             .exceptionHandling(ex -> ex.authenticationEntryPoint(authenticationEntryPoint))
