@@ -34,6 +34,7 @@ public class ArticleController {
     }
 
     @GetMapping("/feed")
+    @PreAuthorize("isAuthenticated()")
     public ArticleListResponse getFeed(
             @RequestParam(defaultValue = "20") int limit,
             @RequestParam(defaultValue = "0") long offset,

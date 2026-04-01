@@ -1,6 +1,7 @@
 package dev.dhev.realworld.article.dto;
 
 import dev.dhev.realworld.article.Article;
+import dev.dhev.realworld.article.Tag;
 
 import java.time.Instant;
 import java.util.List;
@@ -19,7 +20,7 @@ public record ArticleListResponse(List<ArticleListItemDto> articles, long articl
         ArticleResponse.AuthorDto author
     ) {}
 
-    public static ArticleListItemDto toListItem(Article article, boolean favorited, boolean following) {
+    public static ArticleListItemDto toListItem(Article article, boolean favorited, boolean following, long favoritesCount) {
         var author = new ArticleResponse.AuthorDto(
             article.getAuthor().getUsername(),
             article.getAuthor().getBio(),
@@ -30,11 +31,11 @@ public record ArticleListResponse(List<ArticleListItemDto> articles, long articl
             article.getSlug(),
             article.getTitle(),
             article.getDescription(),
-            article.getTags().stream().map(t -> t.getName()).toList(),
+            article.getTags().stream().map(Tag::getName).toList(),
             article.getCreatedAt(),
             article.getUpdatedAt(),
             favorited,
-            article.getFavoritedBy().size(),
+            favoritesCount,
             author
         );
     }

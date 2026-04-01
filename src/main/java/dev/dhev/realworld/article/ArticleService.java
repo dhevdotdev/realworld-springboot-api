@@ -51,7 +51,7 @@ public class ArticleService {
         }
         articleRepository.save(article);
         log.info("Article created: {}", article.getSlug());
-        return ArticleResponse.from(article, false, false);
+        return ArticleResponse.from(article, false, false, 0);
     }
 
     @Transactional(readOnly = true)
@@ -60,11 +60,11 @@ public class ArticleService {
         var spec = buildSpec(tag, author, favorited);
         var pageable = new OffsetPageRequest(offset, limit);
         var page = articleRepository.findAll(spec, pageable);
-        long total = articleRepository.count(spec);
+        var viewer = resolveViewer(currentUserEmail);
         var items = page.getContent().stream()
-                .map(a -> toListItem(a, currentUserEmail))
+                .map(a -> toListItem(a, viewer))
                 .toList();
-        return new ArticleListResponse(items, total);
+        return new ArticleListResponse(items, page.getTotalElements());
     }
 
     @Transactional(readOnly = true)
@@ -77,18 +77,21 @@ public class ArticleService {
         }
         var pageable = new OffsetPageRequest(offset, limit);
         var page = articleRepository.findByAuthorIdIn(followingIds, pageable);
-        long total = articleRepository.countByAuthorIdIn(followingIds);
         var items = page.getContent().stream()
-                .map(a -> toListItem(a, currentUserEmail))
+                .map(a -> toListItem(a, user))
                 .toList();
-        return new ArticleListResponse(items, total);
+        return new ArticleListResponse(items, page.getTotalElements());
     }
 
     @Transactional(readOnly = true)
     public ArticleResponse getArticle(String slug, String currentUserEmail) {
         var article = articleRepository.findBySlug(slug)
                 .orElseThrow(() -> new ResourceNotFoundException("article"));
-        return ArticleResponse.from(article, isFavorited(article, currentUserEmail), isFollowing(article.getAuthor(), currentUserEmail));
+        var viewer = resolveViewer(currentUserEmail);
+        return ArticleResponse.from(article,
+                isFavorited(article, viewer),
+                isFollowing(article.getAuthor(), viewer),
+                articleRepository.countFavoritedBy(article.getId()));
     }
 
     @Transactional
@@ -101,9 +104,18 @@ public class ArticleService {
             throw new ForbiddenException("article");
 
         var dto = request.article();
-        if (dto.title() != null) article.setTitle(dto.title());
-        if (dto.description() != null) article.setDescription(dto.description());
-        if (dto.body() != null) article.setBody(dto.body());
+        if (dto.title() != null) {
+            if (isBlank(dto.title())) throw new ValidationException("title", "can't be blank");
+            article.setTitle(dto.title());
+        }
+        if (dto.description() != null) {
+            if (isBlank(dto.description())) throw new ValidationException("description", "can't be blank");
+            article.setDescription(dto.description());
+        }
+        if (dto.body() != null) {
+            if (isBlank(dto.body())) throw new ValidationException("body", "can't be blank");
+            article.setBody(dto.body());
+        }
 
         @SuppressWarnings("OptionalAssignedToNull")
         var tagList = dto.tagList();
@@ -113,7 +125,10 @@ public class ArticleService {
             article.getTags().addAll(resolveTags(tagList.get()));
         }
         articleRepository.save(article);
-        return ArticleResponse.from(article, isFavorited(article, currentUserEmail), isFollowing(article.getAuthor(), currentUserEmail));
+        return ArticleResponse.from(article,
+                isFavorited(article, user),
+                isFollowing(article.getAuthor(), user),
+                articleRepository.countFavoritedBy(article.getId()));
     }
 
     @Transactional
@@ -134,9 +149,9 @@ public class ArticleService {
                 .orElseThrow(() -> new ResourceNotFoundException("article"));
         var user = userRepository.findByEmail(currentUserEmail)
                 .orElseThrow(() -> new ResourceNotFoundException("user"));
-        article.getFavoritedBy().add(user);
-        articleRepository.save(article);
-        return ArticleResponse.from(article, true, isFollowing(article.getAuthor(), currentUserEmail));
+        articleRepository.addFavorite(article.getId(), user.getId());
+        long count = articleRepository.countFavoritedBy(article.getId());
+        return ArticleResponse.from(article, true, isFollowing(article.getAuthor(), user), count);
     }
 
     @Transactional
@@ -145,39 +160,50 @@ public class ArticleService {
                 .orElseThrow(() -> new ResourceNotFoundException("article"));
         var user = userRepository.findByEmail(currentUserEmail)
                 .orElseThrow(() -> new ResourceNotFoundException("user"));
-        article.getFavoritedBy().remove(user);
-        articleRepository.save(article);
-        return ArticleResponse.from(article, false, isFollowing(article.getAuthor(), currentUserEmail));
+        articleRepository.removeFavorite(article.getId(), user.getId());
+        long count = articleRepository.countFavoritedBy(article.getId());
+        return ArticleResponse.from(article, false, isFollowing(article.getAuthor(), user), count);
     }
 
+    @Transactional(readOnly = true)
     public List<String> getAllTags() {
         return tagRepository.findAll().stream().map(Tag::getName).toList();
     }
 
+    // --- private helpers ---
+
     private Specification<Article> buildSpec(String tag, String author, String favorited) {
-        Specification<Article> spec = Specification.where(null);
-        if (tag != null) spec = spec.and(ArticleSpecs.hasTag(tag));
-        if (author != null) spec = spec.and(ArticleSpecs.hasAuthor(author));
-        if (favorited != null) spec = spec.and(ArticleSpecs.hasFavoritedBy(favorited));
+        Specification<Article> spec = null;
+        if (tag != null)       spec = add(spec, ArticleSpecs.hasTag(tag));
+        if (author != null)    spec = add(spec, ArticleSpecs.hasAuthor(author));
+        if (favorited != null) spec = add(spec, ArticleSpecs.hasFavoritedBy(favorited));
         return spec;
     }
 
-    private ArticleListResponse.ArticleListItemDto toListItem(Article article, String currentUserEmail) {
-        boolean favorited = isFavorited(article, currentUserEmail);
-        boolean following = isFollowing(article.getAuthor(), currentUserEmail);
-        return ArticleListResponse.toListItem(article, favorited, following);
+    private Specification<Article> add(Specification<Article> base, Specification<Article> next) {
+        return base == null ? next : base.and(next);
     }
 
-    private boolean isFavorited(Article article, String currentUserEmail) {
-        if (currentUserEmail == null) return false;
-        return articleRepository.isFavoritedBy(article.getId(), currentUserEmail);
+    private User resolveViewer(String email) {
+        if (email == null) return null;
+        return userRepository.findByEmail(email).orElse(null);
     }
 
-    private boolean isFollowing(User author, String currentUserEmail) {
-        if (currentUserEmail == null) return false;
-        return userRepository.findByEmail(currentUserEmail)
-                .map(u -> followRepository.existsById(new FollowId(u.getId(), author.getId())))
-                .orElse(false);
+    private ArticleListResponse.ArticleListItemDto toListItem(Article article, User viewer) {
+        boolean favorited = isFavorited(article, viewer);
+        boolean following = isFollowing(article.getAuthor(), viewer);
+        long count = articleRepository.countFavoritedBy(article.getId());
+        return ArticleListResponse.toListItem(article, favorited, following, count);
+    }
+
+    private boolean isFavorited(Article article, User viewer) {
+        if (viewer == null) return false;
+        return articleRepository.isFavoritedBy(article.getId(), viewer.getEmail());
+    }
+
+    private boolean isFollowing(User author, User viewer) {
+        if (viewer == null) return false;
+        return followRepository.existsById(new FollowId(viewer.getId(), author.getId()));
     }
 
     private List<Tag> resolveTags(List<String> tagNames) {

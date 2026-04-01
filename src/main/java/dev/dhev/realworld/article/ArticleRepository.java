@@ -18,4 +18,15 @@ public interface ArticleRepository extends JpaRepository<Article, Long>, JpaSpec
 
     @Query("SELECT COUNT(u) > 0 FROM Article a JOIN a.favoritedBy u WHERE a.id = :articleId AND u.email = :email")
     boolean isFavoritedBy(@Param("articleId") Long articleId, @Param("email") String email);
+
+    @Query("SELECT COUNT(u) FROM Article a JOIN a.favoritedBy u WHERE a.id = :articleId")
+    long countFavoritedBy(@Param("articleId") Long articleId);
+
+    @org.springframework.data.jpa.repository.Modifying
+    @Query(value = "INSERT INTO favorites (article_id, user_id) VALUES (:articleId, :userId) ON CONFLICT DO NOTHING", nativeQuery = true)
+    void addFavorite(@Param("articleId") Long articleId, @Param("userId") Long userId);
+
+    @org.springframework.data.jpa.repository.Modifying
+    @Query(value = "DELETE FROM favorites WHERE article_id = :articleId AND user_id = :userId", nativeQuery = true)
+    void removeFavorite(@Param("articleId") Long articleId, @Param("userId") Long userId);
 }
