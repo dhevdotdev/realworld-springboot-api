@@ -39,7 +39,7 @@ public class ProfileService {
             throw new ValidationException("username", "cannot follow yourself");
         try {
             followRepository.saveAndFlush(new Follow(follower, following));
-            log.debug("User {} followed {}", follower.getUsername(), following.getUsername());
+            log.info("User {} followed {}", follower.getUsername(), following.getUsername());
         } catch (DataIntegrityViolationException ignored) {
             // already following — idempotent
         }
@@ -53,7 +53,7 @@ public class ProfileService {
         var following = userRepository.findByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException("profile"));
         followRepository.deleteById(new FollowId(follower.getId(), following.getId()));
-        log.debug("User {} unfollowed {}", follower.getUsername(), following.getUsername());
+        log.info("User {} unfollowed {}", follower.getUsername(), following.getUsername());
         return ProfileResponse.from(following, false);
     }
 }
