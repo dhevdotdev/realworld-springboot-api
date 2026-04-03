@@ -13,6 +13,8 @@ import dev.dhev.realworld.shared.exception.ValidationException;
 import dev.dhev.realworld.user.User;
 import dev.dhev.realworld.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +23,8 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class CommentService {
+
+    private static final Logger log = LoggerFactory.getLogger(CommentService.class);
 
     private final CommentRepository commentRepository;
     private final ArticleRepository articleRepository;
@@ -41,7 +45,7 @@ public class CommentService {
         comment.setArticle(article);
         comment.setAuthor(author);
         commentRepository.save(comment);
-
+        log.info("Comment added: articleSlug={}, commentId={}", slug, comment.getId());
         return CommentResponse.from(comment, false);
     }
 
@@ -64,6 +68,7 @@ public class CommentService {
         if (!comment.getAuthor().getId().equals(user.getId()))
             throw new ForbiddenException("comment");
         commentRepository.delete(comment);
+        log.info("Comment deleted: commentId={}, articleSlug={}", commentId, slug);
     }
 
     // --- private helpers ---

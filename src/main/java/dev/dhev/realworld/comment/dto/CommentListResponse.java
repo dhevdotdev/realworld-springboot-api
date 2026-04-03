@@ -3,6 +3,7 @@ package dev.dhev.realworld.comment.dto;
 import dev.dhev.realworld.comment.Comment;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 public record CommentListResponse(List<CommentItemDto> comments) {
@@ -16,7 +17,7 @@ public record CommentListResponse(List<CommentItemDto> comments) {
     ) {}
 
     public static CommentListResponse from(List<Comment> comments, boolean[] followingFlags) {
-        var items = new java.util.ArrayList<CommentItemDto>(comments.size());
+        var items = new ArrayList<CommentItemDto>(comments.size());
         for (int i = 0; i < comments.size(); i++) {
             var c = comments.get(i);
             var author = new CommentResponse.AuthorDto(
