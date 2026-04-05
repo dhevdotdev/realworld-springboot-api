@@ -170,8 +170,6 @@ public class ArticleService {
         return tagRepository.findAll().stream().map(Tag::getName).toList();
     }
 
-    // --- private helpers ---
-
     private Specification<Article> buildSpec(String tag, String author, String favorited) {
         Specification<Article> spec = null;
         if (tag != null)       spec = add(spec, ArticleSpecs.hasTag(tag));

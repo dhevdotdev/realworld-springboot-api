@@ -71,8 +71,6 @@ public class CommentService {
         log.info("Comment deleted: commentId={}, articleSlug={}", commentId, slug);
     }
 
-    // --- private helpers ---
-
     private Article findArticle(String slug) {
         return articleRepository.findBySlug(slug)
                 .orElseThrow(() -> new ResourceNotFoundException("article"));
