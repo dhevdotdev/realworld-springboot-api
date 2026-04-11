@@ -3,9 +3,7 @@
 Backend implementation of the [RealWorld](https://github.com/realworld-apps/realworld)
 spec using Spring Boot 3, Java 21, PostgreSQL, Flyway, Docker, and Hurl.
 
-Docs:
-- `realworld.dhev.dev`
-- `realworld-api-reference.pages.dev`
+Docs: `realworld.dhev.dev`
 
 ## Stack
 
@@ -16,14 +14,16 @@ Docs:
 - Docker Compose
 - Hurl
 - OpenAPI
-- Scalar
 
-## Included
+## Scope
 
-- Auth, profiles, articles, comments, tags, favorites, and feed
-- Local Docker stack with PostgreSQL
-- Hurl verification suite
-- Static docs site for Cloudflare Pages
+- Auth
+- Profiles
+- Articles
+- Comments
+- Tags
+- Favorites
+- Feed
 
 ## Local
 
@@ -31,12 +31,15 @@ Docs:
 docker compose up --build -d postgres app
 ./scripts/run-hurl.sh
 docker compose down
+```
+
+To reset the local database:
+
+```sh
 docker compose down -v
 ```
 
-## Deploy
-
-Minimal environment:
+## Environment
 
 ```text
 SPRING_DATASOURCE_URL=jdbc:postgresql://<host>/<database>?sslmode=require
