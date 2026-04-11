@@ -30,15 +30,9 @@ Docs:
 ```sh
 docker compose up --build -d postgres app
 ./scripts/run-hurl.sh
-./scripts/export-openapi.sh
 docker compose down
 docker compose down -v
 ```
-
-## CI
-
-- `ci.yml` runs Gradle tests, boots the Docker stack, runs the Hurl suite, and exports OpenAPI
-- `deploy-docs.yml` deploys `docs-site/` to Cloudflare Pages
 
 ## Deploy
 
