@@ -3,7 +3,7 @@
 Backend implementation of the [RealWorld](https://github.com/realworld-apps/realworld)
 spec using Spring Boot 3, Java 21, PostgreSQL, Flyway, Docker, and Hurl.
 
-Docs: `realworld.dhev.dev`
+Docs: [realworld.dhev.dev](https://realworld.dhev.dev)
 
 ## Stack
 
