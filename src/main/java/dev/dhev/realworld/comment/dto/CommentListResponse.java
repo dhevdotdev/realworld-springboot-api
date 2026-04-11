@@ -1,6 +1,7 @@
 package dev.dhev.realworld.comment.dto;
 
 import dev.dhev.realworld.comment.Comment;
+import dev.dhev.realworld.shared.InstantPrecision;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -26,7 +27,13 @@ public record CommentListResponse(List<CommentItemDto> comments) {
                 c.getAuthor().getImage(),
                 followingFlags[i]
             );
-            items.add(new CommentItemDto(c.getId(), c.getBody(), c.getCreatedAt(), c.getUpdatedAt(), author));
+            items.add(new CommentItemDto(
+                c.getId(),
+                c.getBody(),
+                InstantPrecision.toMicros(c.getCreatedAt()),
+                InstantPrecision.toMicros(c.getUpdatedAt()),
+                author
+            ));
         }
         return new CommentListResponse(items);
     }

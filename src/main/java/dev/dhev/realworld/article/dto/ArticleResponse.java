@@ -2,6 +2,7 @@ package dev.dhev.realworld.article.dto;
 
 import dev.dhev.realworld.article.Article;
 import dev.dhev.realworld.article.Tag;
+import dev.dhev.realworld.shared.InstantPrecision;
 
 import java.time.Instant;
 import java.util.List;
@@ -36,8 +37,8 @@ public record ArticleResponse(ArticleDto article) {
             article.getDescription(),
             article.getBody(),
             article.getTags().stream().map(Tag::getName).toList(),
-            article.getCreatedAt(),
-            article.getUpdatedAt(),
+            InstantPrecision.toMicros(article.getCreatedAt()),
+            InstantPrecision.toMicros(article.getUpdatedAt()),
             favorited,
             favoritesCount,
             author

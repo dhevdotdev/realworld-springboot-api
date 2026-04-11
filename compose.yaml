@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: realworld
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d realworld"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      PORT: 8080
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/realworld
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+      JWT_SECRET: MkdhNr+BZydYUbnFnTMCd9ddPPVShVdsDT0322Y5hlQvb/Y6gnywB2TcsuqjdAO6AI4SxtV4Kcqduk8YT4SNSg==
+    ports:
+      - "8080:8080"
+
+  hurl:
+    image: ghcr.io/orange-opensource/hurl:latest
+    profiles: ["verify"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      app:
+        condition: service_started
+    volumes:
+      - ./hurl:/hurl:ro
+    entrypoint:
+      - sh
+      - -lc
+    command: >
+      uid=$$(date +%s%N) &&
+      hurl --test
+      --retry 30
+      --retry-interval 1000
+      --variable host=http://app:8080
+      --variable uid=$$uid
+      /hurl/*.hurl
+
+volumes:
+  postgres-data:

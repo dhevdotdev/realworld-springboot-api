@@ -1,6 +1,7 @@
 package dev.dhev.realworld.comment.dto;
 
 import dev.dhev.realworld.comment.Comment;
+import dev.dhev.realworld.shared.InstantPrecision;
 
 import java.time.Instant;
 
@@ -26,8 +27,8 @@ public record CommentResponse(CommentDto comment) {
         return new CommentResponse(new CommentDto(
             comment.getId(),
             comment.getBody(),
-            comment.getCreatedAt(),
-            comment.getUpdatedAt(),
+            InstantPrecision.toMicros(comment.getCreatedAt()),
+            InstantPrecision.toMicros(comment.getUpdatedAt()),
             author
         ));
     }

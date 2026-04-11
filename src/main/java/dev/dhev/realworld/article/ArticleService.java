@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import jakarta.persistence.EntityManager;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +30,7 @@ public class ArticleService {
     private final TagRepository tagRepository;
     private final UserRepository userRepository;
     private final FollowRepository followRepository;
+    private final EntityManager entityManager;
 
     @Transactional
     public ArticleResponse createArticle(CreateArticleRequest request, String currentUserEmail) {
@@ -49,7 +51,8 @@ public class ArticleService {
         if (dto.tagList() != null) {
             article.getTags().addAll(resolveTags(dto.tagList()));
         }
-        articleRepository.save(article);
+        articleRepository.saveAndFlush(article);
+        entityManager.refresh(article);
         log.info("Article created: {}", article.getSlug());
         return ArticleResponse.from(article, false, false, 0);
     }

@@ -11,9 +11,15 @@
       data-url="/v3/api-docs"
       data-configuration='{
         "theme": "default",
-        "darkMode": false,
+        "forceDarkModeState": "dark",
         "hideModels": true,
-        "servers": [{ "url": "http://localhost:8080", "description": "Local" }],
+        "expandAllResponses": true,
+        "expandAllModelSections": true,
+        "hideTestRequestButton": true,
+        "hideClientButton": true,
+        "documentDownloadType": "none",
+        "showDeveloperTools": "never",
+        "agent": { "disabled": true },
         "authentication": {
           "preferredSecurityScheme": "bearerAuth",
           "http": { "bearer": { "token": "" } }
