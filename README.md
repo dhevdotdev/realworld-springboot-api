@@ -5,6 +5,10 @@ spec using Spring Boot 3, Java 21, PostgreSQL, Flyway, Docker, and Hurl.
 
 Docs: [realworld.dhev.dev](https://realworld.dhev.dev)
 
+Spec and Hurl source:
+- [RealWorld backend spec](https://docs.realworld.show/specifications/backend/introduction/)
+- [RealWorld backend tests](https://docs.realworld.show/specifications/backend/tests/)
+
 ## Stack
 
 - Java 21
