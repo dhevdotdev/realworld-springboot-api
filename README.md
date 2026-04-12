@@ -7,7 +7,8 @@ Docs: [realworld.dhev.dev](https://realworld.dhev.dev)
 
 Spec and Hurl source:
 - [RealWorld backend spec](https://docs.realworld.show/specifications/backend/introduction/)
-- [RealWorld backend tests](https://docs.realworld.show/specifications/backend/tests/)
+- [RealWorld Hurl docs](https://docs.realworld.show/specifications/backend/hurl/)
+- [RealWorld Hurl source](https://github.com/realworld-apps/realworld/tree/main/specs/api/hurl)
 
 ## Stack
 
